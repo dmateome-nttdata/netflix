@@ -45,5 +45,11 @@ public class TvShow implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tvShow")
     private List<Season> seasons;
 
+    @ManyToMany
+    @JoinTable(name = "tvShow_rewards",
+            joinColumns = @JoinColumn(name = "idReward"),
+            inverseJoinColumns = @JoinColumn(name = "idTvShow"))
+    private List<Reward> rewards;
+
 
 }
