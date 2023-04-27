@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "CHAPTERS")
@@ -34,6 +35,12 @@ public class Chapter implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SEASON_ID", nullable = false)
     private Season season;
+
+    @ManyToMany
+    @JoinTable(name = "chapter_actor",
+            joinColumns = @JoinColumn(name = "idActor"),
+            inverseJoinColumns = @JoinColumn(name = "idChapter"))
+    private List<Actor> actors;
 
 
 }
