@@ -82,5 +82,4 @@ public class TvShowRest implements Serializable {
 	public void setAdvertising(String advertising) {
 		this.advertising = advertising;
 	}
-
 }

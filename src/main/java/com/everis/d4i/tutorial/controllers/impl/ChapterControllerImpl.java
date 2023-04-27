@@ -45,7 +45,6 @@ public class ChapterControllerImpl implements ChapterController {
     public NetflixResponse<ChapterRest> updateNameChapter(@RequestBody ChapterRest chapterRest) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
                 chapterService.updateChapter(chapterRest));
-
     }
 
 }

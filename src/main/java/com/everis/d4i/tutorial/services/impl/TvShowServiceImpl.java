@@ -76,4 +76,14 @@ public class TvShowServiceImpl implements TvShowService {
         }
     }
 
+    @Override
+    public TvShowRest deleteTvShow(TvShowRest tvShowRest) throws NetflixException {
+        try {
+            tvShowRepository.deleteById(tvShowRest.getId());
+            return tvShowRest;
+        } catch (EntityNotFoundException entityNotFoundException) {
+            throw new NotFoundException(entityNotFoundException.getMessage());
+        }
+    }
+
 }
