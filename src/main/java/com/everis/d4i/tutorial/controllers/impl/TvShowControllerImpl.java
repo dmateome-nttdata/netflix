@@ -56,7 +56,6 @@ public class TvShowControllerImpl implements TvShowController {
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<TvShowRest> deleteTvShow(@RequestBody TvShowRest tvShowRest) throws NetflixException {
-        System.out.println(tvShowService.getTvShowById(tvShowRest.getId()));
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
                 tvShowService.deleteTvShow(tvShowRest));
     }
