@@ -2,7 +2,9 @@ package com.everis.d4i.tutorial.json;
 
 import java.io.Serializable;
 import java.time.Year;
+import java.util.List;
 
+import com.everis.d4i.tutorial.entities.Reward;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -25,5 +27,5 @@ public class TvShowRest implements Serializable {
 	private byte recommendedAge;
 	private CategoryRest category;
 	private String advertising;
-
+	private List<Reward> rewards;
 }

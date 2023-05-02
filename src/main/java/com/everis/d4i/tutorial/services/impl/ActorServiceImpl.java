@@ -1,9 +1,12 @@
 package com.everis.d4i.tutorial.services.impl;
 
 import com.everis.d4i.tutorial.entities.Actor;
+import com.everis.d4i.tutorial.entities.Chapter;
 import com.everis.d4i.tutorial.exceptions.InternalServerErrorException;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.ActorRest;
+import com.everis.d4i.tutorial.json.ChapterRest;
+import com.everis.d4i.tutorial.json.TvShowRest;
 import com.everis.d4i.tutorial.repositories.ActorRepository;
 import com.everis.d4i.tutorial.services.ActorService;
 import com.everis.d4i.tutorial.utils.constants.ExceptionConstants;
@@ -13,7 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,13 +69,13 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public ActorRest updateActor(ActorRest actorRest) throws NetflixException {
         Actor actor = actorRepository.getOne(actorRest.getId());
-        if(actorRest.getName()!=null)
+        if (actorRest.getName() != null)
             actor.setName(actorRest.getName());
-        else if(actorRest.getSurnames()!=null)
+        else if (actorRest.getSurnames() != null)
             actor.setSurnames(actorRest.getSurnames());
-        else if(actorRest.getAge()!=null)
+        else if (actorRest.getAge() != null)
             actor.setAge(actorRest.getAge());
-        else if (actorRest.getChapters()!=null)
+        else if (actorRest.getChapters() != null)
             actor.setChapters(actorRest.getChapters());
 
         try {
@@ -91,5 +97,26 @@ public class ActorServiceImpl implements ActorService {
             throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
         }
         return modelMapper.map(actor, ActorRest.class);
+    }
+
+    @Override
+    public Map<TvShowRest, List<ChapterRest>> getTvShowAndChapterOfAnActor(Long ActorId) throws NetflixException {
+        Map<TvShowRest, List<ChapterRest>> listNeeded = new HashMap<>();
+        Actor a = actorRepository.getOne(ActorId);
+        //List<ChapterRest> chapters = a.getChapters().stream().map( chapter -> modelMapper.map(chapter, ChapterRest.class)).collect(Collectors.toList());
+        List<Chapter> chapters = a.getChapters();
+        for (Chapter ch : chapters) {
+            TvShowRest tvSR = modelMapper.map(ch.getSeason().getTvShow(), TvShowRest.class);
+            if (listNeeded.containsKey(tvSR)) {
+                listNeeded.get(tvSR).add(modelMapper.map(ch, ChapterRest.class));
+            } else {
+                List<ChapterRest> listChapters = new ArrayList<>();
+                listChapters.add(modelMapper.map(ch, ChapterRest.class));
+                listNeeded.put(tvSR, listChapters);
+            }
+
+        }
+
+        return listNeeded;
     }
 }

@@ -8,10 +8,12 @@ public class RestConstants {
 
 	public static final String RESOURCE_CATEGORY = "/categories";
 	public static final String RESOURCE_ACTOR = "/actors";
+	public static final String RESOURCE_REWARD = "/rewards";
 	public static final String RESOURCE_TV_SHOW = "/tv-shows";
 	public static final String RESOURCE_SEASON = "/tv-shows/{tvShowId}/seasons";
 	public static final String RESOURCE_CHAPTER = "/tv-shows/{tvShowId}/seasons/{seasonNumber}/chapters";
 	public static final String RESOURCE_ID = "/{id}";
+	public static final String RESOURCE_ID_ACTOR = "/{idActor}";
 	public static final String RESOURCE_NUMBER = "/{number}";
 	
 	public static final String PARAMETER_CATEGORY = "categories";

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RewardRepository extends JpaRepository<Chapter, Long> {
-    List<Reward> findByTvShowId(Long tvShowId);
+public interface RewardRepository extends JpaRepository<Reward, Long> {
+    //List<Reward> findByTvShowId(Long tvShowId);
 }
