@@ -23,7 +23,7 @@ public class RewardControllerImpl implements RewardController {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE,path = "users/tvshowrewards/{id}")
     public NetflixResponse<List<RewardRest>> getTvShowRewards(@PathVariable Long id) throws NetflixException {
 
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,

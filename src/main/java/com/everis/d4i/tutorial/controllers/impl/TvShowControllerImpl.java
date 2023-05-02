@@ -40,7 +40,7 @@ public class TvShowControllerImpl implements TvShowController {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/admin/insertcategoryintvshows/{idShow}/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<TvShowRest> insertCategoryInTvShow(@PathVariable Long idShow, @PathVariable Long idCategory) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
                 tvShowService.insertNewCategory(idShow, idCategory));
@@ -48,7 +48,7 @@ public class TvShowControllerImpl implements TvShowController {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(path = "/admin/updatetvshow", produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<TvShowRest> updateNameTvShow(@RequestBody TvShowRest tvShowRest) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
                 tvShowService.updateTvShow(tvShowRest));
@@ -56,7 +56,7 @@ public class TvShowControllerImpl implements TvShowController {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/admin/daletetvshow", produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<TvShowRest> deleteTvShow(@RequestBody TvShowRest tvShowRest) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
                 tvShowService.deleteTvShow(tvShowRest));
