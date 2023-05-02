@@ -37,7 +37,7 @@ public class TvShow implements Serializable {
     @JoinTable(name = "tvShow_categories",
             joinColumns = @JoinColumn(name = "idCategory"),
             inverseJoinColumns = @JoinColumn(name = "idTvShow"))
-    private List<Category> category;
+    private List<Category> categories;
 
     @Column(name = "ADVERTISING", nullable = true)
     private String advertising;
@@ -51,5 +51,14 @@ public class TvShow implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "idTvShow"))
     private List<Reward> rewards;
 
+    public TvShow(Long id, String name, String shortDescription, String longDescription, Year year, byte recommendedAge, String advertising) {
+        this.id = id;
+        this.name = name;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.year = year;
+        this.recommendedAge = recommendedAge;
+        this.advertising = advertising;
+    }
 
 }

@@ -22,7 +22,7 @@ public class Category implements Serializable {
 	@Column(name = "NAME", unique = true)
 	private String name;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "category")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
 	private List<TvShow> tvShows;
 
 	public Category(Long id, String name) {

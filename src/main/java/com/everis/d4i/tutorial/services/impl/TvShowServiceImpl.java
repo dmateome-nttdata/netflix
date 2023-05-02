@@ -46,14 +46,14 @@ public class TvShowServiceImpl implements TvShowService {
     }
 
     @Override
-    public TvShowRest inserNewCategory(Long idShow, Long idCategory) throws NetflixException {
+    public TvShowRest insertNewCategory(Long idShow, Long idCategory) throws NetflixException {
         try {
             TvShow tv = tvShowRepository.findById(idShow).orElse(null);
             Category c = categoryRepository.findById(idCategory).orElse(null);
-            List<Category> list = tv.getCategory();
+            List<Category> list = tv.getCategories();
             if (!list.contains(c)) {
                 list.add(c);
-                tv.setCategory(list);
+                tv.setCategories(list);
                 tvShowRepository.save(tv);
                 return modelMapper.map(tv, TvShowRest.class);
             } else {
@@ -68,8 +68,10 @@ public class TvShowServiceImpl implements TvShowService {
     public TvShowRest updateTvShow(TvShowRest tvShowRest) throws NetflixException {
         try {
             TvShow tv=tvShowRepository.findById(tvShowRest.getId()).orElse(null);
-            tv.setName(tvShowRest.getName());
-            tvShowRepository.save(tv);
+            if(tv != null){
+                tv.setName(tvShowRest.getName());
+                tvShowRepository.save(tv);
+            }
             return modelMapper.map(tv,TvShowRest.class);
         } catch (EntityNotFoundException entityNotFoundException) {
             throw new NotFoundException(entityNotFoundException.getMessage());
@@ -84,6 +86,12 @@ public class TvShowServiceImpl implements TvShowService {
         } catch (EntityNotFoundException entityNotFoundException) {
             throw new NotFoundException(entityNotFoundException.getMessage());
         }
+    }
+
+    @Override
+    public TvShowRest createTvShow(TvShowRest show) throws NetflixException {
+        tvShowRepository.save(modelMapper.map(show, TvShow.class));
+        return show;
     }
 
 }

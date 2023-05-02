@@ -28,4 +28,6 @@ public class TvShowRest implements Serializable {
 	private CategoryRest category;
 	private String advertising;
 	private List<Reward> rewards;
+
+	private List<CategoryRest> categories;
 }

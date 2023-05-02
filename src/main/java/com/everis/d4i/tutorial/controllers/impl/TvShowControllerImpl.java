@@ -32,8 +32,10 @@ public class TvShowControllerImpl implements TvShowController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<TvShowRest> getTvShowById(@PathVariable Long id) throws NetflixException {
+        TvShowRest tvshowAux = tvShowService.getTvShowById(id);
+        tvshowAux.setRewards(null);
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-                tvShowService.getTvShowById(id));
+                tvshowAux);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class TvShowControllerImpl implements TvShowController {
     @PostMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<TvShowRest> insertCategoryInTvShow(@PathVariable Long idShow, @PathVariable Long idCategory) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-                tvShowService.inserNewCategory(idShow, idCategory));
+                tvShowService.insertNewCategory(idShow, idCategory));
     }
 
     @Override
