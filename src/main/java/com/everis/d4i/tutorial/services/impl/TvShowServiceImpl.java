@@ -7,6 +7,7 @@ import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.TvShowRest;
 import com.everis.d4i.tutorial.repositories.CategoryRepository;
 import com.everis.d4i.tutorial.repositories.TvShowRepository;
+import com.everis.d4i.tutorial.services.CategoryService;
 import com.everis.d4i.tutorial.services.TvShowService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TvShowServiceImpl implements TvShowService {
@@ -25,6 +27,14 @@ public class TvShowServiceImpl implements TvShowService {
     private CategoryRepository categoryRepository;
 
     private ModelMapper modelMapper = new ModelMapper();
+
+    @Override
+   public List<TvShowRest> getTvShowsByCategory(Long categoryId) throws NetflixException {
+        long s = categoryId;
+       return tvShowRepository.findByCategories(categoryRepository.findById(s)).stream()
+               .map(tvShow -> modelMapper.map(tvShow, TvShowRest.class)).collect(Collectors.toList());
+
+   }
 
     @Override
     public TvShowRest getTvShowById(Long id) throws NetflixException {

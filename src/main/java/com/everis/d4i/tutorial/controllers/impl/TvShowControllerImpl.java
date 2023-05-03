@@ -12,12 +12,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping( RestConstants.RESOURCE_TV_SHOW)
 public class TvShowControllerImpl implements TvShowController {
 
     @Autowired
     private TvShowService tvShowService;
+
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public NetflixResponse<List<TvShowRest>> getTvShowsByCategory(@RequestParam Long categoryId)
+            throws NetflixException {
+        return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
+                tvShowService.getTvShowsByCategory(categoryId));
+    }
 
     @Override
     @ResponseStatus(HttpStatus.OK)
