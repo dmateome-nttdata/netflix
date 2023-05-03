@@ -20,5 +20,4 @@ public class SeasonRest implements Serializable {
 	private short number;
 	private String name;
 
-
 }

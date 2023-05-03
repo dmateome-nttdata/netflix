@@ -15,9 +15,9 @@ public interface ActorController {
     NetflixResponse<List<ActorRest>> getActors() throws NetflixException;
     NetflixResponse <ActorRest> getActor(Long id) throws NetflixException;
 
-    NetflixResponse<ActorRest> createCategory(ActorRest actorRest) throws NetflixException;
-    NetflixResponse<ActorRest> updateCategory(ActorRest actorRest) throws NetflixException;
-    NetflixResponse<ActorRest> deleteCategory(ActorRest actorRest) throws NetflixException;
+    NetflixResponse<ActorRest> createActor(ActorRest actorRest) throws NetflixException;
+    NetflixResponse<ActorRest> updateActor(ActorRest actorRest) throws NetflixException;
+    NetflixResponse<ActorRest> deleteActor(Long id) throws NetflixException;
     NetflixResponse<Map<TvShowRest, List<ChapterRest>>> getTvShowAndChapterOfAnActor(Long idActor)
             throws NetflixException;
 }

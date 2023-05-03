@@ -43,8 +43,16 @@ public class ActorControllerImpl implements ActorController {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/users/tvShows/{idActor}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public NetflixResponse<Map<TvShowRest, List<ChapterRest>>> getTvShowAndChapterOfAnActor(@PathVariable Long idActor) throws NetflixException {
+        return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
+                actorService.getTvShowAndChapterOfAnActor(idActor));
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping(path = "/admin/createactor",produces = MediaType.APPLICATION_JSON_VALUE)
-    public NetflixResponse<ActorRest> createCategory(@RequestBody ActorRest actorRest) throws NetflixException {
+    public NetflixResponse<ActorRest> createActor(@RequestBody ActorRest actorRest) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
                 actorService.createActor(actorRest));
     }
@@ -52,7 +60,7 @@ public class ActorControllerImpl implements ActorController {
     @Override
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping(path = "/admin/updateactor",produces = MediaType.APPLICATION_JSON_VALUE)
-    public NetflixResponse<ActorRest> updateCategory(@RequestBody ActorRest actorRest) throws NetflixException {
+    public NetflixResponse<ActorRest> updateActor(@RequestBody ActorRest actorRest) throws NetflixException {
         System.out.println(actorRest);
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
                 actorService.updateActor(actorRest));
@@ -60,17 +68,11 @@ public class ActorControllerImpl implements ActorController {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(path = "/admin/deleteactor",produces = MediaType.APPLICATION_JSON_VALUE)
-    public NetflixResponse<ActorRest> deleteCategory(@RequestBody ActorRest actorRest) throws NetflixException {
+    @DeleteMapping(path = "/admin/deleteactor/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public NetflixResponse<ActorRest> deleteActor(@PathVariable Long id) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-                actorService.deleteActor(actorRest));
+                actorService.deleteActor(actorService.getActor(id)));
     }
 
-    @Override
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/users/tvShows/{idActor}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public NetflixResponse<Map<TvShowRest, List<ChapterRest>>> getTvShowAndChapterOfAnActor(@PathVariable Long idActor) throws NetflixException {
-        return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-                actorService.getTvShowAndChapterOfAnActor(idActor));
-    }
+
 }

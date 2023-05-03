@@ -4,6 +4,7 @@ import com.everis.d4i.tutorial.entities.Actor;
 import com.everis.d4i.tutorial.entities.Chapter;
 import com.everis.d4i.tutorial.exceptions.InternalServerErrorException;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
+import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.ActorRest;
 import com.everis.d4i.tutorial.json.ChapterRest;
 import com.everis.d4i.tutorial.json.TvShowRest;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,9 +50,8 @@ public class ActorServiceImpl implements ActorService {
     public ActorRest getActor(Long id) throws NetflixException {
         try {
             return modelMapper.map(actorRepository.getOne(id), ActorRest.class);
-        } catch (final Exception e) {
-            LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
-            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
+        } catch (EntityNotFoundException entityNotFoundException) {
+            throw new NotFoundException(entityNotFoundException.getMessage());
         }
     }
 
@@ -89,30 +90,29 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public ActorRest deleteActor(ActorRest actorRest) throws NetflixException {
-        Actor actor = actorRepository.getOne(actorRest.getId());
         try {
+            Actor actor = actorRepository.getOne(actorRest.getId());
             actorRepository.delete(actor);
-        } catch (final Exception e) {
-            LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
-            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
+
+            return modelMapper.map(actor, ActorRest.class);
+        } catch (EntityNotFoundException entityNotFoundException) {
+            throw new NotFoundException(entityNotFoundException.getMessage());
         }
-        return modelMapper.map(actor, ActorRest.class);
     }
 
     @Override
     public Map<TvShowRest, List<ChapterRest>> getTvShowAndChapterOfAnActor(Long ActorId) throws NetflixException {
         Map<TvShowRest, List<ChapterRest>> listNeeded = new HashMap<>();
         Actor a = actorRepository.getOne(ActorId);
-        //List<ChapterRest> chapters = a.getChapters().stream().map( chapter -> modelMapper.map(chapter, ChapterRest.class)).collect(Collectors.toList());
         List<Chapter> chapters = a.getChapters();
-        for (Chapter ch : chapters) {
-            TvShowRest tvSR = modelMapper.map(ch.getSeason().getTvShow(), TvShowRest.class);
-            if (listNeeded.containsKey(tvSR)) {
+        for(Chapter ch : chapters){
+            TvShowRest tvSR =  modelMapper.map(ch.getSeason().getTvShow(), TvShowRest.class);
+            if(listNeeded.containsKey(tvSR)){
                 listNeeded.get(tvSR).add(modelMapper.map(ch, ChapterRest.class));
-            } else {
+            }else{
                 List<ChapterRest> listChapters = new ArrayList<>();
                 listChapters.add(modelMapper.map(ch, ChapterRest.class));
-                listNeeded.put(tvSR, listChapters);
+                listNeeded.put(tvSR , listChapters);
             }
 
         }

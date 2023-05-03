@@ -30,4 +30,20 @@ public class TvShowRest implements Serializable {
 	private List<Reward> rewards;
 
 	private List<CategoryRest> categories;
+
+	public TvShowRest(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public TvShowRest(Long id, String name, String shortDescription, String longDescription, Year year, byte recommendedAge, CategoryRest category, String advertising) {
+		this.id = id;
+		this.name = name;
+		this.shortDescription = shortDescription;
+		this.longDescription = longDescription;
+		this.year = year;
+		this.recommendedAge = recommendedAge;
+		this.category = category;
+		this.advertising = advertising;
+	}
 }

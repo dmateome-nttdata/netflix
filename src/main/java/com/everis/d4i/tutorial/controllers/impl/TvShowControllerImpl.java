@@ -19,15 +19,6 @@ public class TvShowControllerImpl implements TvShowController {
     @Autowired
     private TvShowService tvShowService;
 
-    /*@Override
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public NetflixResponse<List<TvShowRest>> getTvShowsByCategory(@RequestParam Long categoryId)
-            throws NetflixException {
-        return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-                tvShowService.getTvShowsByCategory(categoryId));
-    }*/
-
     @Override
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,14 +40,15 @@ public class TvShowControllerImpl implements TvShowController {
     @Override
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping(path = "/admin/updatetvshow", produces = MediaType.APPLICATION_JSON_VALUE)
-    public NetflixResponse<TvShowRest> updateNameTvShow(@RequestBody TvShowRest tvShowRest) throws NetflixException {
+    public NetflixResponse<TvShowRest> updateNameInTvShow(@RequestBody TvShowRest showRest) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
-                tvShowService.updateTvShow(tvShowRest));
+                tvShowService.updateTvShow(showRest));
+
     }
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(path = "/admin/daletetvshow", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/admin/deletetvshow", produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<TvShowRest> deleteTvShow(@RequestBody TvShowRest tvShowRest) throws NetflixException {
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK), CommonConstants.OK,
                 tvShowService.deleteTvShow(tvShowRest));
