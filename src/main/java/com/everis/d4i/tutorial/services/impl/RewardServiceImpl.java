@@ -32,7 +32,7 @@ public class RewardServiceImpl implements RewardService {
         try {
             TvShowRest tv = tvShowService.getTvShowById(tvShowId);
 
-            List<Reward> listR = tv.getRewards();
+            List<RewardRest> listR = tv.getRewards();
             return listR.stream().map(reward -> modelMapper.map(reward, RewardRest.class)).collect(Collectors.toList());
         } catch (
                 EntityNotFoundException entityNotFoundException) {

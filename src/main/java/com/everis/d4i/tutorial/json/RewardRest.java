@@ -24,14 +24,11 @@ public class RewardRest implements Serializable {
 
     private String name;
 
-    private List<TvShow> tvShows;
-
     @Override
     public String toString() {
         return "RewardRest{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", tvShows=" + tvShows +
                 '}';
     }
 }
