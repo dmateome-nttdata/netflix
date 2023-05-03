@@ -20,7 +20,7 @@ import com.everis.d4i.tutorial.utils.constants.CommonConstants;
 import com.everis.d4i.tutorial.utils.constants.RestConstants;
 
 @RestController
-@RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_SEASON)
+@RequestMapping( RestConstants.RESOURCE_SEASON)
 public class SeasonControllerImpl implements SeasonController {
 
 	@Autowired

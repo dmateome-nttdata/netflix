@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_ACTOR)
+@RequestMapping( RestConstants.RESOURCE_ACTOR)
 public class ActorControllerImpl implements ActorController {
 
     @Autowired

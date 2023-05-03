@@ -25,7 +25,7 @@ import com.everis.d4i.tutorial.utils.constants.RestConstants;
 import io.swagger.annotations.ApiParam;
 
 @RestController
-@RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_CATEGORY)
+@RequestMapping( RestConstants.RESOURCE_CATEGORY)
 public class CategoryControllerImpl implements CategoryController {
 
 	@Autowired

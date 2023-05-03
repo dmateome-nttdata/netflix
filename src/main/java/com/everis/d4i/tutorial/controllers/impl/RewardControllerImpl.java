@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_REWARD)
+@RequestMapping( RestConstants.RESOURCE_REWARD)
 public class RewardControllerImpl implements RewardController {
 
     @Autowired

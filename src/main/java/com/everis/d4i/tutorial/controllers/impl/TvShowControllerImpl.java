@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_TV_SHOW)
+@RequestMapping( RestConstants.RESOURCE_TV_SHOW)
 public class TvShowControllerImpl implements TvShowController {
 
     @Autowired
