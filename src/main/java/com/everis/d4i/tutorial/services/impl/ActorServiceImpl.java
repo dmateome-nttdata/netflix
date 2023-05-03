@@ -76,8 +76,7 @@ public class ActorServiceImpl implements ActorService {
             actor.setSurnames(actorRest.getSurnames());
         else if (actorRest.getAge() != null)
             actor.setAge(actorRest.getAge());
-        else if (actorRest.getChapters() != null)
-            actor.setChapters(actorRest.getChapters());
+
 
         try {
             actor = actorRepository.save(actor);

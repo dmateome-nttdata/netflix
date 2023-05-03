@@ -29,8 +29,6 @@ public class ActorRest implements Serializable {
 
     private Integer age;
 
-    private List<Chapter> chapters;
-
     @Override
     public String toString() {
         return "ActorRest{" +
@@ -38,7 +36,6 @@ public class ActorRest implements Serializable {
                 ", name='" + name + '\'' +
                 ", surnames='" + surnames + '\'' +
                 ", age=" + age +
-                ", chapters=" + chapters +
                 '}';
     }
 }
