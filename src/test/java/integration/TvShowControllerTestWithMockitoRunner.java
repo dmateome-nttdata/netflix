@@ -140,7 +140,7 @@ public class TvShowControllerTestWithMockitoRunner {
         TvShow tvShow1 = new TvShow(1L, "Stranger Things", "A group of friends search for their missing friend and uncover a government conspiracy.", "In the small town of Hawkins, Indiana, a group of friends sets out on a quest to find their missing friend Will Byers. As they search for answers, they uncover a dark government conspiracy involving secret experiments and supernatural forces.", Year.of(2016), (byte) 14, "Watch the award-winning series everyone is talking about.");
         TvShowRest tvRest = modelMapper.map(tvShow1, TvShowRest.class);
 
-        TvShowRest tvRestAux = new TvShowRest(1L, "La pepa", null, null,null,(byte) 0, null, null);
+        TvShowRest tvRestAux = new TvShowRest(1L, "La pepa", null, null,null,(byte) 0, null);
         tvRest.setName("La pepa");
         when(tvShowServiceImpl.updateTvShow(tvRestAux)).thenReturn(tvRest);
 
