@@ -9,10 +9,15 @@ import com.everis.d4i.tutorial.repositories.TvShowRepository;
 import com.everis.d4i.tutorial.services.impl.TvShowServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Year;
 import java.util.ArrayList;
@@ -23,6 +28,9 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+@RunWith(MockitoJUnitRunner.class)
+@SpringBootTest(classes = TvShow.class)
 public class TvShowServiceImplTest {
 
     @Mock
@@ -67,7 +75,7 @@ public class TvShowServiceImplTest {
 
 
     @Test
-    void insertNewCategory() throws NetflixException {
+    public void insertNewCategory() throws NetflixException {
 
         TvShow tvShow1 = new TvShow(1L, "Stranger Things", "A group of friends search for their missing friend and uncover a government conspiracy.", "In the small town of Hawkins, Indiana, a group of friends sets out on a quest to find their missing friend Will Byers. As they search for answers, they uncover a dark government conspiracy involving secret experiments and supernatural forces.", Year.of(2016), (byte) 14, "Watch the award-winning series everyone is talking about.");
         Category ca = new Category(9L, "Premios Oscars");
@@ -85,7 +93,7 @@ public class TvShowServiceImplTest {
     }
 
     @Test
-    void updateName() throws NetflixException {
+   public void updateName() throws NetflixException {
         TvShow tvShow1 = new TvShow(1L, "Stranger Things", "A group of friends search for their missing friend and uncover a government conspiracy.", "In the small town of Hawkins, Indiana, a group of friends sets out on a quest to find their missing friend Will Byers. As they search for answers, they uncover a dark government conspiracy involving secret experiments and supernatural forces.", Year.of(2016), (byte) 14, "Watch the award-winning series everyone is talking about.");
 
         when(tvShowRepository.findById(tvShow1.getId())).thenReturn(Optional.of(tvShow1));
@@ -99,7 +107,7 @@ public class TvShowServiceImplTest {
     }
 
     @Test
-    void deleteTvShow() {
+   public void deleteTvShow() {
         TvShow tvShow1 = new TvShow(1L, "Stranger Things", "A group of friends search for their missing friend and uncover a government conspiracy.", "In the small town of Hawkins, Indiana, a group of friends sets out on a quest to find their missing friend Will Byers. As they search for answers, they uncover a dark government conspiracy involving secret experiments and supernatural forces.", Year.of(2016), (byte) 14, "Watch the award-winning series everyone is talking about.");
 
         when(tvShowRepository.getOne(1L)).thenReturn(null);
@@ -119,7 +127,7 @@ public class TvShowServiceImplTest {
      * @throws NetflixException
      */
     @Test
-    void insertNewTvShow() throws NetflixException {
+   public void insertNewTvShow() throws NetflixException {
 
         TvShow tvShow1 = new TvShow(1L, "Stranger Things", "A group of friends search for their missing friend and uncover a government conspiracy.", "In the small town of Hawkins, Indiana, a group of friends sets out on a quest to find their missing friend Will Byers. As they search for answers, they uncover a dark government conspiracy involving secret experiments and supernatural forces.", Year.of(2016), (byte) 14, "Watch the award-winning series everyone is talking about.");
         when(tvShowRepository.save(tvShow1)).thenReturn(tvShow1);
